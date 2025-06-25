@@ -6,21 +6,21 @@ using TMPro;
 
 public class PowerUP : MonoBehaviour
 {
-    public TMP_Text texto_pontos;
+   
     public ParticleSystem efeito;
     int pontos = 0;
-    private bool foiColetado = false;
-    private void OnTriggerEnter2D(Collider2D outro)
+    public PlayerMovement PlayerMovement;
+    public GameManager GameManager;
+   private bool foiColetado = false;
+    void OnTriggerEnter2D(Collider2D outroObjeto)
     {
         if (foiColetado) return;
-        if (outro.CompareTag("Player"))
+        if (outroObjeto.CompareTag("Player"))
         {
             
-           foiColetado = true; 
-            
-            pontos++;
-            texto_pontos.text = "Pontos:" + pontos.ToString();
-            outro.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+           foiColetado = true;
+            GameManager.AdicionarPontos(pontos);
+            PlayerMovement.runSpeed = 50f;          
             Instantiate(efeito, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
