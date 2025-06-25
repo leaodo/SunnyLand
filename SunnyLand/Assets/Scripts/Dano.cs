@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-
-public class PowerUP : MonoBehaviour
+public class Dano : MonoBehaviour
 {
-    public TMP_Text texto_pontos;
+    public TMP_Text texto_vida;
     public ParticleSystem efeito;
-    int pontos = 0;
+    int vida = 0;
     private bool foiColetado = false;
     private void OnTriggerEnter2D(Collider2D outro)
     {
@@ -18,13 +17,12 @@ public class PowerUP : MonoBehaviour
             
            foiColetado = true; 
             
-            pontos++;
-            texto_pontos.text = "Pontos:" + pontos.ToString();
+            vida--;
+            texto_vida.text = "Vida:" + vida.ToString();
             outro.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             Instantiate(efeito, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }
     }
-
 }
